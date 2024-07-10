@@ -106,6 +106,10 @@ class SinglyLinkedList {
     this._head = headToRemove.next
     this._length--
 
+    if (!this._length) {
+      this._tail = null
+    }
+
     return headToRemove
   }
 
