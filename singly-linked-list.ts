@@ -67,6 +67,7 @@ class SinglyLinkedList {
     return this
   }
 
+  /** pop & return the popped item if any */
   pop() {
     // Return null if list is empty or has no nodes
     if (!this._head || this._length < 1) return
