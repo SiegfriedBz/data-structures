@@ -13,10 +13,6 @@ class ListNode {
   }
 }
 
-const nodeA = new ListNode('A')
-const nodeB = new ListNode('B')
-const nodeC = new ListNode('C')
-
 class SinglyLinkedList {
   _head: TListNode | null
   _tail: TListNode | null
@@ -29,11 +25,11 @@ class SinglyLinkedList {
   }
 
   // instance methods
-  set head(node) {
-    if (!(node instanceof ListNode)) return
+  // set head(node) {
+  //   if (!(node instanceof ListNode)) return
 
-    this._head = node
-  }
+  //   this._head = node
+  // }
 
   get head() {
     return this._head
@@ -64,17 +60,24 @@ class SinglyLinkedList {
       this._tail = newNode
     }
 
-    this._length += 1
+    // increment length
+    this._length++
+
+    // return linked list instance for chaining
+    return this
   }
 
   // class methods
 }
 
+const nodeA = new ListNode('A')
+const nodeB = new ListNode('B')
+const nodeC = new ListNode('C')
+
 const newList = new SinglyLinkedList()
-newList.head = nodeA
-newList.push(nodeB)
-newList.push(nodeC)
+newList.push(nodeA).push(nodeB).push(nodeC)
+
 console.log(newList.length)
 console.log(newList.head)
-console.log(newList.head.next)
-console.log(newList.head.next?.next)
+console.log(newList.head?.next)
+console.log(newList.head?.next?.next)
