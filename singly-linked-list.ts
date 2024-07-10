@@ -49,6 +49,7 @@ class SinglyLinkedList {
     return this._length
   }
 
+  /** push & return the list */
   push(value: string) {
     const newNode = new ListNode(value)
 
@@ -103,6 +104,7 @@ class SinglyLinkedList {
     return previousTail
   }
 
+  /** shift & return the popped head if any */
   shift() {
     if (!this._head) return
 
@@ -118,6 +120,7 @@ class SinglyLinkedList {
     return headToRemove
   }
 
+  /** unshift & return the list */
   unshift(value: string) {
     if (!this._head) {
       this.push(value)
@@ -133,6 +136,18 @@ class SinglyLinkedList {
     return this
   }
 
+  getValueByNodeNumber(fakeIndex: number) {
+    if (fakeIndex < 1 || fakeIndex > this._length) return
+    if (!this._head) return
+
+    let node: TListNode = this._head
+    for (let i = 1; i < fakeIndex; i++) {
+      node = node.next as TListNode
+    }
+
+    return node.value
+  }
+
   // class methods
 }
 
@@ -143,3 +158,4 @@ newList.pop()
 console.log('After pop -> newList', newList)
 newList.unshift('D')
 console.log('After unshift -> newList', newList)
+console.log(newList.getValueByNodeNumber(2))
