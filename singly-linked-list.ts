@@ -98,6 +98,17 @@ class SinglyLinkedList {
     return previousTail
   }
 
+  shift() {
+    if (!this._head) return
+
+    const headToRemove = this._head
+
+    this._head = headToRemove.next
+    this._length--
+
+    return headToRemove
+  }
+
   // class methods
 }
 
