@@ -49,7 +49,9 @@ class SinglyLinkedList {
     return this._length
   }
 
-  push(newNode: TListNode) {
+  push(value: string) {
+    const newNode = new ListNode(value)
+
     if (!this._head) {
       // set head & tail as being newNode
       this._head = newNode
@@ -93,6 +95,9 @@ class SinglyLinkedList {
     // move current tail to prevNode
     const previousTail = this._tail
     this._tail = prevNode
+    if (this._tail?.next) {
+      this._tail.next = null
+    }
     this._length--
 
     return previousTail
@@ -113,14 +118,28 @@ class SinglyLinkedList {
     return headToRemove
   }
 
+  unshift(value: string) {
+    if (!this._head) {
+      this.push(value)
+    } else {
+      const newNode = new ListNode(value)
+      const currentHead = this._head
+      // unshift
+      this._head = newNode
+      this._head.next = currentHead
+      this._length++
+    }
+
+    return this
+  }
+
   // class methods
 }
 
-const nodeA = new ListNode('A')
-const nodeB = new ListNode('B')
-const nodeC = new ListNode('C')
-
 const newList = new SinglyLinkedList()
-newList.push(nodeA).push(nodeB).push(nodeC)
-
+newList.push('A').push('B').push('C')
+console.log('Before pop -> newList', newList)
 newList.pop()
+console.log('After pop -> newList', newList)
+newList.unshift('D')
+console.log('After unshift -> newList', newList)
