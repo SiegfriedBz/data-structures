@@ -136,7 +136,7 @@ class SinglyLinkedList {
     return this
   }
 
-  getValueByNodeNumber(fakeIndex: number) {
+  getNodeByNumber(fakeIndex: number) {
     if (fakeIndex < 1 || fakeIndex > this._length) return
     if (!this._head) return
 
@@ -145,7 +145,17 @@ class SinglyLinkedList {
       node = node.next as TListNode
     }
 
-    return node.value
+    return node
+  }
+
+  /** update value of a node (if exists) & return list */
+  setValueToNodeNumber(value: string, fakeIndex: number) {
+    let currentNodeAtNumber = this.getNodeByNumber(fakeIndex)
+    if (!currentNodeAtNumber?.value) return
+
+    currentNodeAtNumber.value = value
+
+    return this
   }
 
   // class methods
@@ -158,4 +168,4 @@ newList.pop()
 console.log('After pop -> newList', newList)
 newList.unshift('D')
 console.log('After unshift -> newList', newList)
-console.log(newList.getValueByNodeNumber(2))
+console.log(newList.getNodeByNumber(2))
