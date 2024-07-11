@@ -136,6 +136,7 @@ class SinglyLinkedList {
     return this
   }
 
+  /** get a node by its "index" (1-indexed) */
   getNodeByNumber(fakeIndex: number) {
     if (fakeIndex < 1 || fakeIndex > this._length) return
     if (!this._head) return
@@ -158,6 +159,32 @@ class SinglyLinkedList {
     return this
   }
 
+  /** insert a node & return list */
+  insertAtNodeNumber(value: string, fakeIndex: number) {
+    if (fakeIndex === 1) {
+      // insert at head
+      this.unshift(value)
+      return this
+    }
+    if (fakeIndex === this._length) {
+      // insert at tail
+      this.push(value)
+      return this
+    } else {
+      let previousNode = this.getNodeByNumber(fakeIndex - 1)
+      let currentNode = this.getNodeByNumber(fakeIndex)
+
+      if (!currentNode?.value) return
+
+      const newNode = new ListNode(value)
+      ;(previousNode as TListNode).next = newNode
+      newNode.next = currentNode
+      this._length++
+
+      return this
+    }
+  }
+
   // class methods
 }
 
@@ -169,3 +196,8 @@ console.log('After pop -> newList', newList)
 newList.unshift('D')
 console.log('After unshift -> newList', newList)
 console.log(newList.getNodeByNumber(2))
+
+newList.insertAtNodeNumber('NEW_FIRST', 1)
+console.log('After insertAtNodeNumber -> newList', newList)
+newList.insertAtNodeNumber('NEW_LAST', newList.length)
+console.log('After insertAtNodeNumber -> newList', newList)
