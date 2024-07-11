@@ -24,13 +24,6 @@ class SinglyLinkedList {
     this._length = 0
   }
 
-  // instance methods
-  // set head(node) {
-  //   if (!(node instanceof ListNode)) return
-
-  //   this._head = node
-  // }
-
   get head() {
     return this._head
   }
@@ -49,7 +42,6 @@ class SinglyLinkedList {
     return this._length
   }
 
-  /** push & return the list */
   push(value: string) {
     const newNode = new ListNode(value)
 
@@ -70,7 +62,6 @@ class SinglyLinkedList {
     return this
   }
 
-  /** pop & return the popped item if any */
   pop() {
     // Return null if list is empty or has no nodes
     if (!this._head || this._length < 1) return
@@ -104,7 +95,6 @@ class SinglyLinkedList {
     return previousTail
   }
 
-  /** shift & return the popped head if any */
   shift() {
     if (!this._head) return
 
@@ -120,7 +110,6 @@ class SinglyLinkedList {
     return headToRemove
   }
 
-  /** unshift & return the list */
   unshift(value: string) {
     if (!this._head) {
       this.push(value)
@@ -136,7 +125,6 @@ class SinglyLinkedList {
     return this
   }
 
-  /** get a node by its "index" (1-indexed) */
   getNodeByNumber(fakeIndex: number) {
     if (fakeIndex < 1 || fakeIndex > this._length) return
     if (!this._head) return
@@ -149,7 +137,6 @@ class SinglyLinkedList {
     return node
   }
 
-  /** update value of a node (if exists) & return list */
   setValueToNodeNumber(value: string, fakeIndex: number) {
     let currentNodeAtNumber = this.getNodeByNumber(fakeIndex)
     if (!currentNodeAtNumber?.value) return
@@ -159,7 +146,6 @@ class SinglyLinkedList {
     return this
   }
 
-  /** insert a node & return list */
   insertAtNodeNumber(value: string, fakeIndex: number) {
     if (fakeIndex === 1) {
       // insert at head
@@ -171,7 +157,9 @@ class SinglyLinkedList {
       this.push(value)
       return this
     } else {
+      // Get the node before the target node
       let previousNode = this.getNodeByNumber(fakeIndex - 1)
+      // Get the target node
       let currentNode = this.getNodeByNumber(fakeIndex)
 
       if (!currentNode?.value) return
@@ -183,6 +171,32 @@ class SinglyLinkedList {
 
       return this
     }
+  }
+
+  removeAtNodeNumber(fakeIndex: number) {
+    // Get the node before the target node
+    let previousNode = this.getNodeByNumber(fakeIndex - 1)
+    // Get the target node
+    let currentNode = this.getNodeByNumber(fakeIndex)
+
+    // If there's no previous node, the target node is the head
+    if (!previousNode) {
+      // remove current head
+      this.shift()
+      return this
+    }
+
+    // If there's no current node or the current node has no value, it's the tail
+    if (!currentNode?.value) {
+      // remove current tail
+      this.pop()
+      return this
+    }
+
+    // else, Bypass the target node
+    previousNode.next = currentNode.next
+    this._length--
+    return this
   }
 
   // class methods
