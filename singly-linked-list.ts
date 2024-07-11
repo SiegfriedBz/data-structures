@@ -199,7 +199,27 @@ class SinglyLinkedList {
     return this
   }
 
-  // class methods
+  reverse() {
+    let prevNode: TListNode | null = null
+    let currentNode: TListNode | null = this._head
+    let nextNode: TListNode | null = null
+
+    while (currentNode != null) {
+      nextNode = currentNode?.next
+      // swap pointers
+      currentNode.next = prevNode
+
+      // for next iteration
+      prevNode = currentNode
+      // go to next iteration
+      currentNode = nextNode
+    }
+
+    this._tail = this._head
+    this._head = prevNode // "currentNode" just before last while loop iteration
+
+    return this
+  }
 }
 
 const newList = new SinglyLinkedList()
@@ -215,3 +235,6 @@ newList.insertAtNodeNumber('NEW_FIRST', 1)
 console.log('After insertAtNodeNumber -> newList', newList)
 newList.insertAtNodeNumber('NEW_LAST', newList.length)
 console.log('After insertAtNodeNumber -> newList', newList)
+console.log('Before reverse -> newList', newList)
+newList.reverse()
+console.log('After reverse -> newList', newList)
